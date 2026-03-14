@@ -45,7 +45,15 @@ const Body = () => {
             const data = await fetch(URL);
             const json = await data.json();
 
-            const apiRestaurants = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+            let apiRestaurants = [];
+            const cards = json?.data?.cards || [];
+            
+            for (const c of cards) {
+                const resList = c?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+                if (resList && resList.length > apiRestaurants.length) {
+                    apiRestaurants = resList;
+                }
+            }
 
             // API + MOCK MERGE
             const mergedRestaurants = [...apiRestaurants, ...resList];
