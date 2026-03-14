@@ -30,8 +30,9 @@ const Body = () => {
       fetchData();         // existing list API
     }, []);
 
-    const URL = "http://localhost:5000/api/restaurants";
-    // const UPDATE_URL = "http://localhost:5000/api/restaurants/update";
+    const URL = window.location.hostname === "localhost" 
+      ? "http://localhost:5000/api/restaurants" 
+      : "/api/restaurants";
 
     const handleFilter = () => {
         const filteredList = listOfRestaurants.filter(
